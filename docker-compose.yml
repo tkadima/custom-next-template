@@ -1,19 +1,15 @@
-version: '3.8'
+version: '3.9'
+
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
-      - .:/app
+      - .:/app:delegated
       - /app/node_modules
     environment:
       NODE_ENV: development
     command: npm run dev
-    depends_on:
-      - db
-
-  db:
-    image: nouchka/sqlite3
-    volumes:
-      - ./database:/database
